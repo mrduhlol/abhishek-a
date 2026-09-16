@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="950" viewBox="0 0 800 950">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#141a2b"/>
+      <stop offset="60%" stop-color="#0a0e16"/>
+      <stop offset="100%" stop-color="#07090c"/>
+    </radialGradient>
+    <linearGradient id="br" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a5f3fc"/>
+      <stop offset="100%" stop-color="#0e7490"/>
+    </linearGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0v44" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="950" fill="url(#bg)"/>
+  <rect width="800" height="950" fill="url(#grid)"/>
+  <text x="60" y="150" font-family="monospace" font-size="30" fill="rgba(255,255,255,0.14)">01010110 01100101 01110010</text>
+  <text x="60" y="800" font-family="monospace" font-size="30" fill="rgba(255,255,255,0.14)">sudo ./secure --build</text>
+  <!-- brackets -->
+  <text x="90" y="540" font-family="monospace" font-size="300" font-weight="bold" fill="none" stroke="url(#br)" stroke-width="6">&lt;</text>
+  <text x="600" y="540" font-family="monospace" font-size="300" font-weight="bold" fill="none" stroke="url(#br)" stroke-width="6">/&gt;</text>
+  <!-- lock -->
+  <rect x="320" y="430" width="160" height="130" rx="20" fill="#0e2233" stroke="#00e5ff" stroke-width="4"/>
+  <path d="M350 430v-30a50 50 0 0 1 100 0v30" fill="none" stroke="#7dd3fc" stroke-width="16"/>
+  <circle cx="400" cy="482" r="16" fill="#00e5ff"/>
+  <rect x="394" y="490" width="12" height="30" rx="6" fill="#00e5ff"/>
+  <ellipse cx="400" cy="600" rx="120" ry="16" fill="#00e5ff" opacity="0.12"/>
+  <!-- code lines -->
+  <g opacity="0.9">
+    <rect x="250" y="250" width="300" height="14" rx="7" fill="#1e293b"/>
+    <rect x="280" y="278" width="240" height="14" rx="7" fill="#164e63"/>
+    <rect x="250" y="640" width="300" height="14" rx="7" fill="#1e293b"/>
+    <rect x="290" y="668" width="220" height="14" rx="7" fill="#4ade80" opacity="0.5"/>
+  </g>
+  <text x="400" y="850" text-anchor="middle" font-family="monospace" font-size="26" letter-spacing="8" fill="rgba(255,255,255,0.4)">THE BUILD — 03</text>
+</svg>

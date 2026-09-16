@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="950" viewBox="0 0 800 950">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="90%">
+      <stop offset="0%" stop-color="#12202e"/>
+      <stop offset="60%" stop-color="#0b1018"/>
+      <stop offset="100%" stop-color="#07090c"/>
+    </radialGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e2a38"/>
+      <stop offset="100%" stop-color="#0a141d"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#7dd3fc"/>
+    </linearGradient>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0v44" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="950" fill="url(#bg)"/>
+  <rect width="800" height="950" fill="url(#grid)"/>
+  <ellipse cx="400" cy="420" rx="260" ry="200" fill="#00e5ff" opacity="0.07"/>
+  <!-- monitor -->
+  <rect x="170" y="230" width="460" height="300" rx="18" fill="#101823" stroke="rgba(255,255,255,0.16)" stroke-width="2"/>
+  <rect x="192" y="254" width="416" height="230" rx="10" fill="url(#screen)" stroke="rgba(0,229,255,0.35)" stroke-width="1.5"/>
+  <text x="216" y="300" font-family="monospace" font-size="26" fill="#00e5ff">$ whoami</text>
+  <text x="216" y="340" font-family="monospace" font-size="24" fill="#4ade80">➜ abhishek-a</text>
+  <rect x="216" y="362" width="250" height="14" rx="7" fill="#1e293b"/>
+  <rect x="216" y="390" width="330" height="14" rx="7" fill="#1e293b"/>
+  <rect x="216" y="418" width="180" height="14" rx="7" fill="url(#cyan)" opacity="0.85"/>
+  <rect x="404" y="408" width="16" height="32" fill="#00e5ff" opacity="0.9"/>
+  <!-- stand + desk -->
+  <rect x="380" y="530" width="40" height="60" fill="#1b2432"/>
+  <rect x="320" y="588" width="160" height="14" rx="7" fill="#1b2432"/>
+  <rect x="90" y="610" width="620" height="16" rx="8" fill="#182130" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <!-- keyboard -->
+  <rect x="220" y="650" width="360" height="90" rx="14" fill="#101823" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
+  <g fill="#223148">
+    <rect x="240" y="668" width="46" height="26" rx="6"/><rect x="294" y="668" width="46" height="26" rx="6"/><rect x="348" y="668" width="46" height="26" rx="6"/><rect x="402" y="668" width="46" height="26" rx="6"/><rect x="456" y="668" width="46" height="26" rx="6"/><rect x="510" y="668" width="46" height="26" rx="6"/>
+    <rect x="240" y="702" width="150" height="26" rx="6"/><rect x="398" y="702" width="46" height="26" rx="6"/><rect x="452" y="702" width="104" height="26" rx="6"/>
+  </g>
+  <rect x="240" y="668" width="46" height="26" rx="6" fill="none" stroke="#00e5ff" stroke-width="2" opacity="0.7"/>
+  <!-- mug -->
+  <rect x="620" y="540" width="56" height="70" rx="10" fill="#182130" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+  <path d="M676 552h18a14 14 0 0 1 0 44h-20" fill="none" stroke="#223148" stroke-width="10"/>
+  <path d="M640 528c0-14 16-14 16-28M662 528c0-14 16-14 16-28" stroke="rgba(255,255,255,0.25)" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- headphones -->
+  <path d="M120 700a60 60 0 0 1 120 0" fill="none" stroke="#223148" stroke-width="14" stroke-linecap="round"/>
+  <rect x="108" y="690" width="26" height="60" rx="12" fill="#182130" stroke="rgba(0,229,255,0.4)" stroke-width="2"/>
+  <rect x="226" y="690" width="26" height="60" rx="12" fill="#182130" stroke="rgba(0,229,255,0.4)" stroke-width="2"/>
+  <text x="400" y="850" text-anchor="middle" font-family="monospace" font-size="26" letter-spacing="8" fill="rgba(255,255,255,0.4)">THE SETUP — 01</text>
+</svg>
