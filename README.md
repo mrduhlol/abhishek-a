@@ -4,6 +4,8 @@ Personal portfolio website of **Abhishek A**, a Computer Science (Cyber Security
 
 ## Features
 
+- Parallax theme — starfield, nebula orbs, and grid drift at different depths while scrolling
+- Scroll-driven motion — headings float at their own speeds, images pan inside their frames, giant outlined words slide by
 - Minimal hero with animated starfield and cursor-following glow
 - Custom cursor (dot + trailing ring) on desktop, native cursor on touch devices
 - Scroll-driven hero animation — name drifts, scales, and blurs into a marquee transition band
