@@ -255,6 +255,27 @@
   function rs() { W = c.width = innerWidth; H = c.height = innerHeight; }
   addEventListener('resize', rs); rs();
   for (let i = 0; i < 70; i++) dots.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.4+0.3, s: Math.random()*0.25+0.05 });
+
+  // --- drifting space lines: random spawn, angle, speed ---
+  let streaks = [];
+  function spawnStreak() {
+    const edge = Math.floor(Math.random() * 4); // 0 top, 1 right, 2 bottom, 3 left
+    let sx, sy;
+    if (edge === 0) { sx = Math.random()*W; sy = -60; }
+    else if (edge === 1) { sx = W + 60; sy = Math.random()*H; }
+    else if (edge === 2) { sx = Math.random()*W; sy = H + 60; }
+    else { sx = -60; sy = Math.random()*H; }
+    const a = Math.random() * Math.PI * 2; // random direction
+    const sp = Math.random() * 2.6 + 0.8;  // random speed
+    streaks.push({
+      x: sx, y: sy,
+      vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+      len: Math.random() * 110 + 40,       // random length
+      life: 0, maxLife: Math.random() * 220 + 140, // random lifespan
+      hue: Math.random() < 0.7 ? '0,229,255' : '255,255,255' // mostly cyan, some white
+    });
+  }
+  for (let i = 0; i < 10; i++) { spawnStreak(); const s = streaks[i]; s.x = Math.random()*W; s.y = Math.random()*H; s.life = Math.random()*s.maxLife; }
   (function loop() {
     x.clearRect(0, 0, W, H);
     for (const d of dots) {
@@ -262,6 +283,22 @@
       x.beginPath(); x.arc(d.x, d.y, d.r, 0, 7);
       x.fillStyle = 'rgba(255,255,255,0.45)'; x.fill();
     }
+    if (streaks.length < 14 && Math.random() < 0.06) spawnStreak(); // random respawn
+    const m = Math.hypot(W, H);
+    streaks.forEach(s => {
+      s.x += s.vx; s.y += s.vy; s.life++;
+      const fade = Math.sin((s.life / s.maxLife) * Math.PI); // fade in/out over life
+      const tail = Math.min(s.len, s.life * 2); // tail grows as it moves
+      const a = Math.atan2(s.vy, s.vx);
+      const tx = s.x - Math.cos(a) * tail, ty = s.y - Math.sin(a) * tail;
+      const g = x.createLinearGradient(s.x, s.y, tx, ty);
+      g.addColorStop(0, `rgba(${s.hue},${0.75 * fade})`);
+      g.addColorStop(1, `rgba(${s.hue},0)`);
+      x.beginPath(); x.moveTo(s.x, s.y); x.lineTo(tx, ty);
+      x.strokeStyle = g; x.lineWidth = 1.4; x.stroke();
+    });
+    // recycle dead / escaped streaks with fresh random ones
+    streaks = streaks.filter(s => s.life < s.maxLife && s.x > -m && s.x < W + m && s.y > -m && s.y < H + m);
     requestAnimationFrame(loop);
   })();
 
