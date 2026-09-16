@@ -4,7 +4,8 @@ Personal portfolio website of **Abhishek A**, a Computer Science (Cyber Security
 
 ## Features
 
-- Calm light "paper" theme with a soft static gradient wash — no heavy animation
+- Stone Age theme — cave descent, ember dust, and firelight
+- Scroll-scrubbed 3D feel — the cave zooms as you enter, a spear flies left to right only with your scroll, and cavemen push boulder picture-frames to center stage
 - Minimal hero with fade-in entrance and scroll-away name animation
 - Custom cursor (dot + trailing ring) on desktop, native cursor on touch devices
 - Scroll-driven hero animation — name drifts, scales, and blurs into a marquee transition band
