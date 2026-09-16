@@ -3,312 +3,385 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Abhishek A — CSE Cyber Security</title>
+<title>Hello — abhishek-a</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
   html, body {
-    background: #07090c;
-    color: #f1f4f8;
-    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+    height: 100%;
+    overflow: hidden;
+    background: #050510;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    cursor: crosshair;
   }
 
-  /* ===== custom cursor (desktop only) ===== */
-  @media (hover: hover) and (pointer: fine) {
-    body, a, button { cursor: none; }
+  /* --- Crazy animated base gradient --- */
+  .bg-base {
+    position: fixed; inset: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(45deg, #ff0080, #7928ca, #0070f3, #00ffa3, #ffea00, #ff0080);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+    opacity: 0.35;
+    filter: saturate(1.6);
   }
-  .cursor-dot, .cursor-ring {
-    position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
-    border-radius: 50%; transform: translate(-50%, -50%);
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; transform: rotate(0deg) scale(1); }
+    50% { background-position: 100% 50%; transform: rotate(180deg) scale(1.2); }
+    100% { background-position: 0% 50%; transform: rotate(360deg) scale(1); }
   }
-  .cursor-dot { width: 8px; height: 8px; background: #00e5ff; box-shadow: 0 0 12px rgba(0,229,255,0.9); }
-  .cursor-ring {
-    width: 38px; height: 38px;
-    border: 1.5px solid rgba(0,229,255,0.65);
-    transition: width .25s, height .25s, border-color .25s, background .25s;
-  }
-  .cursor-ring.hot { width: 64px; height: 64px; border-color: rgba(255,255,255,0.9); background: rgba(0,229,255,0.10); }
-  @media (hover: none) { .cursor-dot, .cursor-ring { display: none; } }
 
-  /* ===== fixed bg layers ===== */
-  .glow {
-    position: fixed; width: 640px; height: 640px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,229,255,0.10), transparent 65%);
+  /* --- Aurora blobs --- */
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0.8;
+  }
+  .blob-1 {
+    width: 55vmax; height: 55vmax;
+    background: radial-gradient(circle, #ff0080, transparent 70%);
+    top: -15vmax; left: -15vmax;
+    animation: float1 11s ease-in-out infinite alternate;
+  }
+  .blob-2 {
+    width: 50vmax; height: 50vmax;
+    background: radial-gradient(circle, #0070f3, transparent 70%);
+    bottom: -15vmax; right: -10vmax;
+    animation: float2 13s ease-in-out infinite alternate;
+  }
+  .blob-3 {
+    width: 40vmax; height: 40vmax;
+    background: radial-gradient(circle, #00ffa3, transparent 70%);
+    top: 30%; left: 50%;
+    animation: float3 9s ease-in-out infinite alternate;
+  }
+  .blob-4 {
+    width: 35vmax; height: 35vmax;
+    background: radial-gradient(circle, #7928ca, transparent 70%);
+    top: 10%; right: 10%;
+    animation: float1 15s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes float1 {
+    0% { transform: translate(0,0) scale(1) rotate(0deg); }
+    100% { transform: translate(12vw, 10vh) scale(1.3) rotate(90deg); }
+  }
+  @keyframes float2 {
+    0% { transform: translate(0,0) scale(1.1); }
+    100% { transform: translate(-14vw, -12vh) scale(0.85); }
+  }
+  @keyframes float3 {
+    0% { transform: translate(-50%,-50%) scale(1); }
+    100% { transform: translate(-30%,-70%) scale(1.4); }
+  }
+
+  /* --- Grid + noise overlay --- */
+  .grid-overlay {
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+    animation: gridPan 8s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes gridPan {
+    0% { background-position: 0 0, 0 0; }
+    100% { background-position: 60px 60px, 60px 60px; }
+  }
+
+  #particles {
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+  }
+
+  /* --- Cursor glow --- */
+  #glow {
+    position: fixed;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.35), rgba(255,0,128,0.15), transparent 70%);
+    pointer-events: none;
     transform: translate(-50%, -50%);
-    pointer-events: none; z-index: 0;
+    mix-blend-mode: screen;
+    filter: blur(10px);
+    z-index: 5;
   }
-  .grid {
-    position: fixed; inset: 0; pointer-events: none; opacity: .5; z-index: 0;
-    background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: radial-gradient(circle at 50% 45%, black, transparent 75%);
-  }
-  #stars { position: fixed; inset: 0; z-index: 0; }
 
-  header {
-    position: relative; z-index: 5;
-    display: flex; justify-content: space-between; align-items: center;
-    max-width: 900px; margin: 0 auto; padding: 28px 24px;
-    font-size: 0.85rem; color: rgba(255,255,255,0.55);
+  /* --- Center content --- */
+  .center {
+    position: relative;
+    z-index: 10;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
   }
-  header b { color: #fff; letter-spacing: 0.08em; }
 
-  /* ===== hero ===== */
-  .hero {
-    position: relative; z-index: 5;
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center; padding: 0 24px;
+  .hello {
+    font-size: clamp(5rem, 20vw, 16rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    background: linear-gradient(90deg, #fff, #ff0080, #ffea00, #00ffa3, #0070f3, #fff);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: textFlow 4s linear infinite, floatText 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(255,0,128,0.6)) drop-shadow(0 0 80px rgba(0,112,243,0.4));
+    user-select: none;
+    transition: transform 0.15s ease-out;
   }
-  .hero-inner { animation: rise 1s ease both; will-change: transform, opacity; }
-  @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-  .eyebrow { font-size: 0.75rem; letter-spacing: 0.35em; color: rgba(255,255,255,0.5); text-transform: uppercase; }
-  h1 {
-    margin-top: 14px;
-    font-size: clamp(2.8rem, 9vw, 5.5rem);
-    font-weight: 800; letter-spacing: -0.03em; line-height: 1;
-    will-change: transform;
+  @keyframes textFlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
   }
-  .rule { width: 48px; height: 2px; background: #00e5ff; border-radius: 2px; margin: 22px auto 16px; box-shadow: 0 0 14px rgba(0,229,255,0.8); }
-  h2 {
-    font-size: clamp(0.8rem, 2.6vw, 1rem);
-    font-weight: 600; letter-spacing: 0.5em; text-indent: 0.5em;
-    color: rgba(165,243,252,0.9);
+  @keyframes floatText {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -18px; }
   }
-  .tagline { margin-top: 16px; color: rgba(255,255,255,0.55); font-size: 0.95rem; }
-  .row { display: flex; gap: 12px; margin-top: 30px; justify-content: center; }
-  a.btn {
-    text-decoration: none; font-size: 0.85rem; font-weight: 600;
-    padding: 11px 26px; border-radius: 100px;
-    border: 1px solid rgba(255,255,255,0.18);
-    color: #fff; background: rgba(255,255,255,0.05);
-    transition: all .2s;
-  }
-  a.btn.solid { background: #fff; color: #000; border-color: #fff; }
-  a.btn:hover { transform: translateY(-2px); }
-  a.btn.solid:hover { box-shadow: 0 8px 28px rgba(255,255,255,0.25); }
-  a.btn:not(.solid):hover { border-color: rgba(0,229,255,0.6); box-shadow: 0 8px 28px rgba(0,229,255,0.15); }
-  .scroll-hint {
-    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
-    color: rgba(255,255,255,0.45); animation: bob 2s ease-in-out infinite;
-  }
-  @keyframes bob { 50% { transform: translate(-50%, 8px); } }
 
-  /* ===== marquee transition band ===== */
-  .band {
-    position: relative; z-index: 5; overflow: hidden; white-space: nowrap;
-    border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);
-    background: rgba(0,229,255,0.04); padding: 14px 0;
-    transform: rotate(-1.2deg) scale(1.02); margin: 20px 0 10px;
+  .hello.glitch { animation: glitch 0.3s linear 3, textFlow 4s linear infinite; }
+  @keyframes glitch {
+    0% { transform: translate(0); text-shadow: -6px 0 #00ffa3, 6px 0 #ff0080; }
+    25% { transform: translate(-8px, 4px) skewX(8deg); }
+    50% { transform: translate(8px, -4px) skewX(-8deg); text-shadow: 6px 0 #00ffa3, -6px 0 #ff0080; }
+    75% { transform: translate(-4px, -2px); }
+    100% { transform: translate(0); }
   }
-  .band span {
-    display: inline-block; padding-right: 48px;
-    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.35em; color: rgba(165,243,252,0.75);
-    animation: slide 22s linear infinite;
-  }
-  @keyframes slide { to { transform: translateX(-100%); } }
 
-  /* ===== story / gallery ===== */
-  .story { position: relative; z-index: 5; max-width: 1020px; margin: 0 auto; padding: 70px 24px 30px; }
-  .story-head { text-align: center; margin-bottom: 56px; }
-  .story-head small { font-size: 0.72rem; letter-spacing: 0.35em; color: rgba(0,229,255,0.8); text-transform: uppercase; }
-  .story-head h3 { margin-top: 10px; font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; }
-  .shot {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
-    margin-bottom: 90px; opacity: 0; transform: translateY(48px);
-    transition: opacity .8s ease, transform .8s ease;
+  .subtitle {
+    margin-top: 1rem;
+    color: rgba(255,255,255,0.85);
+    font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    animation: pulse 2.5s ease-in-out infinite;
   }
-  .shot.in { opacity: 1; transform: none; }
-  .shot.flip .ph { order: 2; }
-  @media (max-width: 760px) { .shot { grid-template-columns: 1fr; gap: 20px; } .shot.flip .ph { order: 0; } }
-  .ph {
-    border-radius: 20px; overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.14);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-    transition: transform .35s ease, box-shadow .35s ease;
-  }
-  .ph:hover { transform: scale(1.02); box-shadow: 0 24px 70px rgba(0,229,255,0.15); }
-  .ph img { display: block; width: 100%; height: auto; }
-  .txt .num { font-family: monospace; font-size: 0.78rem; letter-spacing: 0.3em; color: rgba(0,229,255,0.85); }
-  .txt h4 { margin: 10px 0 12px; font-size: clamp(1.3rem, 3.5vw, 1.8rem); font-weight: 750; letter-spacing: -0.01em; }
-  .txt p { color: rgba(255,255,255,0.6); line-height: 1.75; font-size: 0.95rem; }
+  @keyframes pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
 
-  /* ===== cream footer ===== */
-  footer.cream {
-    position: relative; z-index: 5; overflow: hidden;
-    background: #f3ecdd; color: #211a12;
-    margin-top: 30px; padding: 64px 24px 0;
+  .hint {
+    position: fixed;
+    bottom: 28px;
+    color: rgba(255,255,255,0.55);
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    z-index: 10;
+    animation: pulse 2s infinite;
   }
-  .foot-inner { max-width: 1020px; margin: 0 auto; text-align: center; }
-  .me { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
-  .me small { display: block; margin-top: 8px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.3em; opacity: 0.55; }
-  .social-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
-  .soc-pill {
-    display: inline-flex; align-items: center; gap: 10px;
-    color: #211a12; text-decoration: none; font-size: 0.88rem; font-weight: 600;
-    padding: 9px 20px 9px 10px; border-radius: 100px;
-    border: 1px solid rgba(33,26,18,0.22); background: rgba(255,255,255,0.5);
-    transition: all .2s;
+
+  .controls {
+    position: fixed;
+    top: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 20;
   }
-  .soc-pill:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(33,26,18,0.16); border-color: rgba(33,26,18,0.5); }
-  .soc-pill .ic { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: #211a12; color: #f3ecdd; flex-shrink: 0; }
-  .base-line a { color: inherit; }
-  .watermark {
-    margin-top: 36px; text-align: center; user-select: none;
-    font-size: clamp(1.3rem, 3.5vw, 1.9rem); font-weight: 800; letter-spacing: 0.12em; line-height: 1;
-    color: transparent; -webkit-text-stroke: 1px rgba(33,26,18,0.4);
-    white-space: nowrap;
+  .controls button {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    backdrop-filter: blur(12px);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-transform: uppercase;
   }
-  .base-line {
-    border-top: 1px solid rgba(33,26,18,0.18);
-    margin-top: -6px; padding: 16px 0 20px; text-align: center;
-    font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.55;
+  .controls button:hover, .controls button.active {
+    background: white;
+    color: black;
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255,255,255,0.5);
   }
 </style>
 </head>
 <body>
 
-<div class="cursor-dot" id="cDot"></div>
-<div class="cursor-ring" id="cRing"></div>
+<div class="bg-base"></div>
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+<div class="blob blob-4"></div>
+<div class="grid-overlay"></div>
+<canvas id="particles"></canvas>
+<div id="glow"></div>
 
-<canvas id="stars"></canvas>
-<div class="grid"></div>
-<div class="glow" id="glow" style="left:50%;top:45%"></div>
-
-<header><b>AA.</b><span>portfolio © 2026</span></header>
-
-<section class="hero" id="top">
-  <div class="hero-inner" id="heroInner">
-    <div class="eyebrow">Hello, I'm</div>
-    <h1 id="heroName">ABHISHEK A</h1>
-    <div class="rule"></div>
-    <h2>CSE CYBER SECURITY</h2>
-    <p class="tagline">Learning to hack safely & build securely.</p>
-    <div class="row">
-      <a class="btn solid" href="#story">See my story ↓</a>
-      <a class="btn" href="#contact">Contact</a>
-    </div>
-  </div>
-  <div class="scroll-hint">scroll</div>
-</section>
-
-<div class="band" aria-hidden="true">
-  <span>CYBER SECURITY • ETHICAL HACKING • LINUX • NETWORKING • PYTHON • CTF •&nbsp;</span><span>CYBER SECURITY • ETHICAL HACKING • LINUX • NETWORKING • PYTHON • CTF •&nbsp;</span>
+<div class="controls">
+  <button class="active" data-mode="neon">Neon</button>
+  <button data-mode="matrix">Matrix</button>
+  <button data-mode="fire">Fire</button>
 </div>
 
-<section class="story" id="story">
-  <div class="story-head">
-    <small>A little about me</small>
-    <h3>Moments behind the screen</h3>
-  </div>
+<div class="center">
+  <h1 class="hello" id="hello">Hello</h1>
+  <p class="subtitle">welcome to my universe</p>
+</div>
 
-  <div class="shot">
-    <div class="ph"><img src="images/pic1.svg" alt="My desk setup with terminal open" /></div>
-    <div class="txt">
-      <div class="num">01 / THE SETUP</div>
-      <h4>Where the grind happens</h4>
-      <p>My everyday battlestation — terminal open, notes everywhere. This is where I spend hours practicing Linux, Python and security labs, one command at a time.</p>
-    </div>
-  </div>
-
-  <div class="shot flip">
-    <div class="ph"><img src="images/pic2.svg" alt="Security radar scan with shield" /></div>
-    <div class="txt">
-      <div class="num">02 / THE HUNT</div>
-      <h4>Learning to think like an attacker</h4>
-      <p>CTFs, scanning labs and security drills taught me how attacks actually work — footprinting, probing, exploiting — so I can understand how to defend against them.</p>
-    </div>
-  </div>
-
-  <div class="shot">
-    <div class="ph"><img src="images/pic3.svg" alt="Secure code and lock illustration" /></div>
-    <div class="txt">
-      <div class="num">03 / THE BUILD</div>
-      <h4>Building, not just breaking</h4>
-      <p>Everything I break in the lab becomes something I build better — clean code, small tools and projects with security baked in from the first line.</p>
-    </div>
-  </div>
-</section>
-
-<footer class="cream" id="contact">
-  <div class="foot-inner">
-    <div class="me">Let's talk security<small>CSE • CYBER SECURITY</small></div>
-    <div class="social-row">
-      <a class="soc-pill" href="mailto:hello@abhishek.dev"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m2 7 10 6L22 7"/></svg></span><span>hello@abhishek.dev</span></a>
-      <a class="soc-pill" href="#"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 22 12c0-5.5-4.5-10-10-10z"/></svg></span><span>@abhishek-a</span></a>
-      <a class="soc-pill" href="#"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.1h4.56V23H.22V8.1zM8.34 8.1h4.37v2h.06c.61-1.15 2.1-2.37 4.32-2.37 4.62 0 5.47 3.04 5.47 7v8.3h-4.55v-7.35c0-1.75-.03-4-2.44-4-2.44 0-2.82 1.9-2.82 3.87V23H8.34V8.1z"/></svg></span><span>Abhishek A</span></a>
-    </div>
-    <div class="watermark">Abhishek A</div>
-    <div class="base-line">© 2026 Abhishek A • stay curious • stay secure • <a href="#top">Back to top ↑</a></div>
-  </div>
-</footer>
+<div class="hint">move mouse • click for explosion</div>
 
 <script>
-  // --- starfield ---
-  const c = document.getElementById('stars'), x = c.getContext('2d');
-  let W, H, dots = [];
-  function rs() { W = c.width = innerWidth; H = c.height = innerHeight; }
-  addEventListener('resize', rs); rs();
-  for (let i = 0; i < 70; i++) dots.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.4+0.3, s: Math.random()*0.25+0.05 });
-  (function loop() {
-    x.clearRect(0, 0, W, H);
-    for (const d of dots) {
-      d.y -= d.s; if (d.y < 0) { d.y = H; d.x = Math.random()*W; }
-      x.beginPath(); x.arc(d.x, d.y, d.r, 0, 7);
-      x.fillStyle = 'rgba(255,255,255,0.45)'; x.fill();
-    }
-    requestAnimationFrame(loop);
-  })();
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  const hello = document.getElementById('hello');
+  const glow = document.getElementById('glow');
+  let W, H, particles = [], mouse = { x: -999, y: -999 };
+  let mode = 'neon';
 
-  // --- custom cursor skin: dot + trailing ring ---
-  const dot = document.getElementById('cDot'), ring = document.getElementById('cRing');
-  let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
-  addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-    document.getElementById('glow').style.left = mx + 'px';
-    document.getElementById('glow').style.top = my + 'px';
-  });
-  (function follow() {
-    rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(follow);
-  })();
-  document.querySelectorAll('a, button, .ph').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('hot'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('hot'));
-  });
+  const themes = {
+    neon: ['#ff0080', '#7928ca', '#0070f3', '#00ffa3', '#ffffff'],
+    matrix: ['#00ff41', '#00cc33', '#ccffcc', '#008f11', '#ffffff'],
+    fire: ['#ff4d00', '#ffea00', '#ff0080', '#ff9500', '#ffffff']
+  };
 
-  // --- hero name scroll animation: drift up, shrink, fade ---
-  const heroInner = document.getElementById('heroInner'), heroName = document.getElementById('heroName');
-  function onScroll() {
-    const p = Math.min(scrollY / innerHeight, 1);
-    heroInner.style.transform = `translateY(${p * -140}px) scale(${1 - p * 0.12})`;
-    heroInner.style.opacity = 1 - p * 1.15;
-    heroName.style.letterSpacing = `${-0.03 + p * 0.12}em`;
-    heroName.style.filter = `blur(${p * 6}px)`;
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
-  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  window.addEventListener('resize', resize);
+  resize();
 
-  // --- reveal shots on scroll ---
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-  }), { threshold: 0.2 });
-  document.querySelectorAll('.shot, .story-head').forEach(el => io.observe(el));
-
-  // --- smooth scroll for all in-page links (Contact -> footer etc.) ---
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href');
-      if (id.length > 1) {
-        const t = document.querySelector(id);
-        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  class Particle {
+    constructor(burstX, burstY) {
+      if (burstX !== undefined) {
+        this.x = burstX; this.y = burstY;
+        const a = Math.random() * Math.PI * 2;
+        const s = Math.random() * 9 + 2;
+        this.vx = Math.cos(a) * s;
+        this.vy = Math.sin(a) * s;
+        this.life = 1;
+        this.decay = Math.random() * 0.02 + 0.008;
+      } else {
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.vx = (Math.random() - 0.5) * 1.2;
+        this.vy = (Math.random() - 0.5) * 1.2;
+        this.life = Math.random();
+        this.decay = 0;
       }
+      this.size = Math.random() * 3.5 + 0.8;
+      this.color = themes[mode][Math.floor(Math.random() * themes[mode].length)];
+      this.trail = [];
+    }
+    update() {
+      // mouse repulsion + attraction swirl
+      const dx = this.x - mouse.x, dy = this.y - mouse.y;
+      const dist = Math.hypot(dx, dy);
+      if (dist < 180 && dist > 1) {
+        const force = (180 - dist) / 180 * 1.6;
+        this.vx += (dx / dist) * force;
+        this.vy += (dy / dist) * force;
+      }
+      this.vx *= 0.985; this.vy *= 0.985;
+      this.x += this.vx; this.y += this.vy;
+      this.life -= this.decay;
+
+      this.trail.push({ x: this.x, y: this.y });
+      if (this.trail.length > 8) this.trail.shift();
+
+      // wrap around
+      if (!this.decay) {
+        if (this.x < 0) this.x = W; if (this.x > W) this.x = 0;
+        if (this.y < 0) this.y = H; if (this.y > H) this.y = 0;
+      }
+    }
+    draw() {
+      // trail
+      for (let i = 0; i < this.trail.length; i++) {
+        const t = this.trail[i];
+        const alpha = (i / this.trail.length) * 0.5 * (this.decay ? this.life : 1);
+        ctx.beginPath();
+        ctx.arc(t.x, t.y, this.size * (i / this.trail.length), 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.globalAlpha = alpha;
+        ctx.fill();
+      }
+      ctx.globalAlpha = this.decay ? this.life : 0.9;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.shadowBlur = 18;
+      ctx.shadowColor = this.color;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  // init ambient particles
+  for (let i = 0; i < 160; i++) particles.push(new Particle());
+
+  // connect nearby particles with lines
+  function connect() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j];
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = a.color;
+          ctx.globalAlpha = (1 - d / 120) * 0.25;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+      }
+    }
+  }
+
+  function loop() {
+    ctx.fillStyle = 'rgba(5,5,16,0.28)';
+    ctx.fillRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    connect();
+    // remove dead burst particles, keep ambient count
+    particles = particles.filter(p => p.life > 0 || !p.decay);
+    while (particles.filter(p => !p.decay).length < 130) particles.push(new Particle());
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  // mouse glow + hello tilt
+  window.addEventListener('mousemove', e => {
+    mouse.x = e.clientX; mouse.y = e.clientY;
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+    const cx = (e.clientX / W - 0.5), cy = (e.clientY / H - 0.5);
+    hello.style.transform = `rotateY(${cx * 30}deg) rotateX(${-cy * 30}deg) scale(${1 + Math.hypot(cx,cy)*0.15})`;
+  });
+
+  // click explosion
+  window.addEventListener('click', e => {
+    for (let i = 0; i < 60; i++) particles.push(new Particle(e.clientX, e.clientY));
+    hello.classList.remove('glitch');
+    void hello.offsetWidth;
+    hello.classList.add('glitch');
+  });
+
+  // auto glitch every 4s
+  setInterval(() => {
+    hello.classList.remove('glitch');
+    void hello.offsetWidth;
+    hello.classList.add('glitch');
+  }, 4000);
+
+  // theme buttons
+  document.querySelectorAll('.controls button').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      mode = btn.dataset.mode;
+      particles.forEach(p => p.color = themes[mode][Math.floor(Math.random() * themes[mode].length)]);
     });
   });
 </script>
