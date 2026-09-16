@@ -8,8 +8,8 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   html, body {
-    background: #07090c;
-    color: #f1f4f8;
+    background: #f5f1e8;
+    color: #191512;
     font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -23,42 +23,31 @@
     position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
     border-radius: 50%; transform: translate(-50%, -50%);
   }
-  .cursor-dot { width: 8px; height: 8px; background: #00e5ff; box-shadow: 0 0 12px rgba(0,229,255,0.9); }
+  .cursor-dot { width: 8px; height: 8px; background: #0097b3; box-shadow: 0 0 12px rgba(0,151,179,0.55); }
   .cursor-ring {
     width: 38px; height: 38px;
-    border: 1.5px solid rgba(0,229,255,0.65);
+    border: 1.5px solid rgba(0,151,179,0.6);
     transition: width .25s, height .25s, border-color .25s, background .25s;
   }
-  .cursor-ring.hot { width: 64px; height: 64px; border-color: rgba(255,255,255,0.9); background: rgba(0,229,255,0.10); }
+  .cursor-ring.hot { width: 64px; height: 64px; border-color: rgba(25,21,18,0.8); background: rgba(0,151,179,0.08); }
   @media (hover: none) { .cursor-dot, .cursor-ring { display: none; } }
 
-  /* ===== parallax depth layers (fixed, drift at different speeds) ===== */
-  #stars { position: fixed; left: 0; top: -15%; width: 100%; height: 130%; z-index: 0; will-change: transform; }
-  .orb { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; will-change: transform; }
-  .orb.o1 { width: 52vmax; height: 52vmax; left: -16vmax; top: 2%; background: radial-gradient(circle, rgba(0,229,255,0.15), transparent 65%); }
-  .orb.o2 { width: 46vmax; height: 46vmax; right: -15vmax; top: 32%; background: radial-gradient(circle, rgba(124,58,237,0.17), transparent 65%); }
-  .orb.o3 { width: 38vmax; height: 38vmax; left: 18%; top: 68%; background: radial-gradient(circle, rgba(16,185,129,0.11), transparent 65%); }
-  .glow {
-    position: fixed; width: 640px; height: 640px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,229,255,0.10), transparent 65%);
-    transform: translate(-50%, -50%);
-    pointer-events: none; z-index: 0;
-  }
-  .grid {
-    position: fixed; inset: -10% 0; pointer-events: none; opacity: .5; z-index: 0; will-change: transform;
-    background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: radial-gradient(circle at 50% 45%, black, transparent 75%);
+  /* ===== calm paper backdrop ===== */
+  .wash {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(900px 620px at 50% 10%, rgba(0,160,180,0.10), transparent 60%),
+      radial-gradient(760px 560px at 88% 92%, rgba(124,58,237,0.08), transparent 60%),
+      radial-gradient(700px 520px at 8% 86%, rgba(139,0,0,0.05), transparent 60%);
   }
 
   header {
     position: relative; z-index: 5;
     display: flex; justify-content: space-between; align-items: center;
     max-width: 900px; margin: 0 auto; padding: 28px 24px;
-    font-size: 0.85rem; color: rgba(255,255,255,0.55);
+    font-size: 0.85rem; color: rgba(25,21,18,0.55);
   }
-  header b { color: #fff; letter-spacing: 0.08em; }
+  header b { color: #191512; letter-spacing: 0.08em; }
 
   /* ===== hero ===== */
   .hero {
@@ -70,103 +59,84 @@
   }
   .hero-inner { animation: rise 1s ease both; will-change: transform, opacity; }
   @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
-  [data-speed] { will-change: transform; }
-  .eyebrow { font-size: 0.75rem; letter-spacing: 0.35em; color: rgba(255,255,255,0.5); text-transform: uppercase; }
+  .eyebrow { font-size: 0.75rem; letter-spacing: 0.35em; color: rgba(25,21,18,0.5); text-transform: uppercase; }
   h1 {
     margin-top: 14px;
     font-size: clamp(2.8rem, 9vw, 5.5rem);
     font-weight: 800; letter-spacing: -0.03em; line-height: 1;
     will-change: transform;
   }
-  .rule { width: 48px; height: 2px; background: #00e5ff; border-radius: 2px; margin: 22px auto 16px; box-shadow: 0 0 14px rgba(0,229,255,0.8); }
+  .rule { width: 48px; height: 2px; background: #00a8c6; border-radius: 2px; margin: 22px auto 16px; box-shadow: 0 0 12px rgba(0,168,198,0.5); }
   h2 {
     font-size: clamp(0.8rem, 2.6vw, 1rem);
     font-weight: 600; letter-spacing: 0.5em; text-indent: 0.5em;
-    color: rgba(165,243,252,0.9);
+    color: #0b7d99;
   }
-  .tagline { margin-top: 16px; color: rgba(255,255,255,0.55); font-size: 0.95rem; }
+  .tagline { margin-top: 16px; color: rgba(25,21,18,0.6); font-size: 0.95rem; }
   .row { display: flex; gap: 12px; margin-top: 30px; justify-content: center; }
   a.btn {
     text-decoration: none; font-size: 0.85rem; font-weight: 600;
     padding: 11px 26px; border-radius: 100px;
-    border: 1px solid rgba(255,255,255,0.18);
-    color: #fff; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(25,21,18,0.22);
+    color: #191512; background: rgba(255,255,255,0.55);
     transition: all .2s;
   }
-  a.btn.solid { background: #fff; color: #000; border-color: #fff; }
+  a.btn.solid { background: #191512; color: #f5f1e8; border-color: #191512; }
   a.btn:hover { transform: translateY(-2px); }
-  a.btn.solid:hover { box-shadow: 0 8px 28px rgba(255,255,255,0.25); }
-  a.btn:not(.solid):hover { border-color: rgba(0,229,255,0.6); box-shadow: 0 8px 28px rgba(0,229,255,0.15); }
+  a.btn.solid:hover { box-shadow: 0 8px 28px rgba(25,21,18,0.3); }
+  a.btn:not(.solid):hover { border-color: rgba(0,168,198,0.7); box-shadow: 0 8px 28px rgba(0,168,198,0.2); }
   .scroll-hint {
     position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
     font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
-    color: rgba(255,255,255,0.45); animation: bob 2s ease-in-out infinite;
+    color: rgba(25,21,18,0.45); animation: bob 2s ease-in-out infinite;
   }
   @keyframes bob { 50% { transform: translate(-50%, 8px); } }
 
   /* ===== marquee transition band ===== */
   .band {
     position: relative; z-index: 5; overflow: hidden; white-space: nowrap;
-    border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);
-    background: rgba(0,229,255,0.04); padding: 14px 0;
+    border-top: 1px solid rgba(25,21,18,0.14); border-bottom: 1px solid rgba(25,21,18,0.14);
+    background: rgba(0,168,198,0.07); padding: 14px 0;
     transform: rotate(-1.2deg) scale(1.02); margin: 20px 0 10px;
   }
   .band span {
     display: inline-block; padding-right: 48px;
-    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.35em; color: rgba(165,243,252,0.75);
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.35em; color: rgba(11,125,153,0.9);
     animation: slide 22s linear infinite;
   }
   @keyframes slide { to { transform: translateX(-100%); } }
 
-  /* ===== horizontal parallax band (scroll-driven) ===== */
-  .hscroll { position: relative; z-index: 5; overflow: hidden; padding: 30px 0 10px; }
-  .hscroll .track {
-    white-space: nowrap; will-change: transform;
-    font-size: clamp(3rem, 11vw, 8rem); font-weight: 900; letter-spacing: -0.02em; line-height: 1;
-    color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.16);
-    user-select: none;
-  }
-  .hscroll .track b { color: rgba(0,229,255,0.10); -webkit-text-stroke: 0; font-weight: 900; }
-
   /* ===== story / gallery ===== */
-  .story { position: relative; z-index: 5; max-width: 1020px; margin: 0 auto; padding: 40px 24px 30px; }
-  .story-head { text-align: center; margin-bottom: 56px; position: relative; }
-  .story-head small { font-size: 0.72rem; letter-spacing: 0.35em; color: rgba(0,229,255,0.8); text-transform: uppercase; }
+  .story { position: relative; z-index: 5; max-width: 1020px; margin: 0 auto; padding: 70px 24px 30px; }
+  .story-head { text-align: center; margin-bottom: 56px; }
+  .story-head small { font-size: 0.72rem; letter-spacing: 0.35em; color: rgba(11,125,153,0.9); text-transform: uppercase; }
   .story-head h3 { margin-top: 10px; font-size: clamp(1.6rem, 4.5vw, 2.4rem); font-weight: 800; letter-spacing: -0.02em; }
   .shot {
     display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
     margin-bottom: 90px; opacity: 0; transform: translateY(48px);
     transition: opacity .8s ease, transform .8s ease;
-    position: relative;
   }
   .shot.in { opacity: 1; transform: none; }
-  .shot.flip .pimg { order: 2; }
-  @media (max-width: 760px) { .shot { grid-template-columns: 1fr; gap: 20px; } .shot.flip .pimg { order: 0; } }
-  .giant {
-    position: absolute; top: -8%; z-index: -1;
-    font-size: clamp(4rem, 15vw, 11rem); font-weight: 900; line-height: 1; white-space: nowrap;
-    color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.09);
-    pointer-events: none; user-select: none; will-change: transform;
-  }
-  .shot:not(.flip) .giant { right: -2%; }
-  .shot.flip .giant { left: -2%; }
-  .pimg {
+  .shot.flip .ph { order: 2; }
+  @media (max-width: 760px) { .shot { grid-template-columns: 1fr; gap: 20px; } .shot.flip .ph { order: 0; } }
+  .ph {
     border-radius: 20px; overflow: hidden;
-    height: min(62vh, 500px);
-    border: 1px solid rgba(255,255,255,0.14);
-    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-    transition: box-shadow .35s ease;
+    border: 1px solid rgba(25,21,18,0.14);
+    box-shadow: 0 18px 45px rgba(25,21,18,0.16);
+    transition: transform .35s ease, box-shadow .35s ease;
+    background: #fff;
   }
-  .pimg:hover { box-shadow: 0 24px 70px rgba(0,229,255,0.18); }
-  .pimg img { display: block; width: 100%; height: 130%; object-fit: cover; margin-top: -15%; will-change: transform; }
-  .txt .num { font-family: monospace; font-size: 0.78rem; letter-spacing: 0.3em; color: rgba(0,229,255,0.85); }
+  .ph:hover { transform: scale(1.02); box-shadow: 0 22px 55px rgba(0,168,198,0.22); }
+  .ph img { display: block; width: 100%; height: auto; }
+  .txt .num { font-family: monospace; font-size: 0.78rem; letter-spacing: 0.3em; color: #0b7d99; }
   .txt h4 { margin: 10px 0 12px; font-size: clamp(1.3rem, 3.5vw, 1.8rem); font-weight: 750; letter-spacing: -0.01em; }
-  .txt p { color: rgba(255,255,255,0.6); line-height: 1.75; font-size: 0.95rem; }
+  .txt p { color: rgba(25,21,18,0.65); line-height: 1.75; font-size: 0.95rem; }
 
   /* ===== cream footer ===== */
   footer.cream {
     position: relative; z-index: 5; overflow: hidden;
-    background: #f3ecdd; color: #211a12;
+    background: #e9dfc8; color: #211a12;
+    border-top: 1px solid rgba(33,26,18,0.15);
     margin-top: 30px; padding: 64px 24px 0;
   }
   .foot-inner { max-width: 1020px; margin: 0 auto; text-align: center; }
@@ -201,22 +171,17 @@
 <div class="cursor-dot" id="cDot"></div>
 <div class="cursor-ring" id="cRing"></div>
 
-<canvas id="stars"></canvas>
-<div class="orb o1" data-depth="0.10"></div>
-<div class="orb o2" data-depth="0.18"></div>
-<div class="orb o3" data-depth="0.28"></div>
-<div class="grid" data-depth="0.06"></div>
-<div class="glow" id="glow" style="left:50%;top:45%"></div>
+<div class="wash"></div>
 
 <header><b>AA.</b><span>portfolio © 2026</span></header>
 
 <section class="hero" id="top">
   <div class="hero-inner" id="heroInner">
-    <div class="eyebrow" data-speed="0.04">Hello, I'm</div>
-    <h1 id="heroName" data-speed="0.10">ABHISHEK A</h1>
+    <div class="eyebrow">Hello, I'm</div>
+    <h1 id="heroName">ABHISHEK A</h1>
     <div class="rule"></div>
-    <h2 data-speed="0.06">CSE CYBER SECURITY</h2>
-    <p class="tagline" data-speed="0.03">Learning to hack safely & build securely.</p>
+    <h2>CSE CYBER SECURITY</h2>
+    <p class="tagline">Learning to hack safely & build securely.</p>
     <div class="row">
       <a class="btn solid" href="#story">See my story ↓</a>
       <a class="btn" href="#contact">Contact</a>
@@ -229,20 +194,15 @@
   <span>CYBER SECURITY • ETHICAL HACKING • LINUX • NETWORKING • PYTHON • CTF •&nbsp;</span><span>CYBER SECURITY • ETHICAL HACKING • LINUX • NETWORKING • PYTHON • CTF •&nbsp;</span>
 </div>
 
-<div class="hscroll" aria-hidden="true">
-  <div class="track" id="htrack">HACK <b>SAFE</b> • BUILD <b>SECURE</b> • HACK <b>SAFE</b> • BUILD <b>SECURE</b> •&nbsp;</div>
-</div>
-
 <section class="story" id="story">
-  <div class="story-head" data-speed="0.05">
+  <div class="story-head">
     <small>A little about me</small>
     <h3>Moments behind the screen</h3>
   </div>
 
   <div class="shot">
-    <div class="giant" data-speed="-0.10">SETUP</div>
-    <div class="pimg"><img src="images/pic1.svg" alt="My desk setup with terminal open" /></div>
-    <div class="txt" data-speed="0.05">
+    <div class="ph"><img src="images/pic1.svg" alt="My desk setup with terminal open" /></div>
+    <div class="txt">
       <div class="num">01 / THE SETUP</div>
       <h4>Where the grind happens</h4>
       <p>My everyday battlestation — terminal open, notes everywhere. This is where I spend hours practicing Linux, Python and security labs, one command at a time.</p>
@@ -250,9 +210,8 @@
   </div>
 
   <div class="shot flip">
-    <div class="giant" data-speed="-0.10">HUNT</div>
-    <div class="pimg"><img src="images/pic2.svg" alt="Security radar scan with shield" /></div>
-    <div class="txt" data-speed="0.05">
+    <div class="ph"><img src="images/pic2.svg" alt="Security radar scan with shield" /></div>
+    <div class="txt">
       <div class="num">02 / THE HUNT</div>
       <h4>Learning to think like an attacker</h4>
       <p>CTFs, scanning labs and security drills taught me how attacks actually work — footprinting, probing, exploiting — so I can understand how to defend against them.</p>
@@ -260,9 +219,8 @@
   </div>
 
   <div class="shot">
-    <div class="giant" data-speed="-0.10">BUILD</div>
-    <div class="pimg"><img src="images/pic3.svg" alt="Secure code and lock illustration" /></div>
-    <div class="txt" data-speed="0.05">
+    <div class="ph"><img src="images/pic3.svg" alt="Secure code and lock illustration" /></div>
+    <div class="txt">
       <div class="num">03 / THE BUILD</div>
       <h4>Building, not just breaking</h4>
       <p>Everything I break in the lab becomes something I build better — clean code, small tools and projects with security baked in from the first line.</p>
@@ -278,123 +236,39 @@
       <a class="soc-pill" href="https://github.com/mrduhlol" target="_blank" rel="noopener"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.4 2.9 8.2 6.8 9.5.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.2-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.4.1 2.6.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 22 12c0-5.5-4.5-10-10-10z"/></svg></span><span>@mrduhlol</span></a>
       <a class="soc-pill" href="#"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.1h4.56V23H.22V8.1zM8.34 8.1h4.37v2h.06c.61-1.15 2.1-2.37 4.32-2.37 4.62 0 5.47 3.04 5.47 7v8.3h-4.55v-7.35c0-1.75-.03-4-2.44-4-2.44 0-2.82 1.9-2.82 3.87V23H8.34V8.1z"/></svg></span><span>Abhishek A</span></a>
     </div>
-    <div class="watermark" data-speed="0.04">Abhishek A</div>
+    <div class="watermark">Abhishek A</div>
     <div class="base-line">© 2026 Abhishek A • stay curious • stay secure • <a href="#top">Back to top ↑</a></div>
   </div>
 </footer>
 
 <script>
-  // --- starfield (taller canvas: room to drift with parallax) ---
-  const c = document.getElementById('stars'), x = c.getContext('2d');
-  let W, H, dots = [];
-  function rs() { W = c.width = innerWidth; H = c.height = Math.ceil(innerHeight * 1.3); }
-  addEventListener('resize', rs); rs();
-  for (let i = 0; i < 90; i++) dots.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.4+0.3, s: Math.random()*0.25+0.05 });
-
-  // --- drifting space lines: random spawn, angle, speed ---
-  let streaks = [];
-  function spawnStreak() {
-    const edge = Math.floor(Math.random() * 4); // 0 top, 1 right, 2 bottom, 3 left
-    let sx, sy;
-    if (edge === 0) { sx = Math.random()*W; sy = -60; }
-    else if (edge === 1) { sx = W + 60; sy = Math.random()*H; }
-    else if (edge === 2) { sx = Math.random()*W; sy = H + 60; }
-    else { sx = -60; sy = Math.random()*H; }
-    const a = Math.random() * Math.PI * 2; // random direction
-    const sp = Math.random() * 2.6 + 0.8;  // random speed
-    streaks.push({
-      x: sx, y: sy,
-      vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
-      len: Math.random() * 110 + 40,       // random length
-      life: 0, maxLife: Math.random() * 220 + 140, // random lifespan
-      hue: Math.random() < 0.7 ? '0,229,255' : '255,255,255' // mostly cyan, some white
-    });
-  }
-  for (let i = 0; i < 10; i++) { spawnStreak(); const s = streaks[i]; s.x = Math.random()*W; s.y = Math.random()*H; s.life = Math.random()*s.maxLife; }
-  (function loop() {
-    x.clearRect(0, 0, W, H);
-    for (const d of dots) {
-      d.y -= d.s; if (d.y < 0) { d.y = H; d.x = Math.random()*W; }
-      x.beginPath(); x.arc(d.x, d.y, d.r, 0, 7);
-      x.fillStyle = 'rgba(255,255,255,0.45)'; x.fill();
-    }
-    if (streaks.length < 14 && Math.random() < 0.06) spawnStreak(); // random respawn
-    const m = Math.hypot(W, H);
-    streaks.forEach(s => {
-      s.x += s.vx; s.y += s.vy; s.life++;
-      const fade = Math.sin((s.life / s.maxLife) * Math.PI); // fade in/out over life
-      const tail = Math.min(s.len, s.life * 2); // tail grows as it moves
-      const a = Math.atan2(s.vy, s.vx);
-      const tx = s.x - Math.cos(a) * tail, ty = s.y - Math.sin(a) * tail;
-      const g = x.createLinearGradient(s.x, s.y, tx, ty);
-      g.addColorStop(0, `rgba(${s.hue},${0.75 * fade})`);
-      g.addColorStop(1, `rgba(${s.hue},0)`);
-      x.beginPath(); x.moveTo(s.x, s.y); x.lineTo(tx, ty);
-      x.strokeStyle = g; x.lineWidth = 1.4; x.stroke();
-    });
-    // recycle dead / escaped streaks with fresh random ones
-    streaks = streaks.filter(s => s.life < s.maxLife && s.x > -m && s.x < W + m && s.y > -m && s.y < H + m);
-    requestAnimationFrame(loop);
-  })();
-
   // --- custom cursor skin: dot + trailing ring ---
   const dot = document.getElementById('cDot'), ring = document.getElementById('cRing');
   let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
   addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
     dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-    document.getElementById('glow').style.left = mx + 'px';
-    document.getElementById('glow').style.top = my + 'px';
   });
   (function follow() {
     rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
     ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
     requestAnimationFrame(follow);
   })();
-  document.querySelectorAll('a, button, .pimg').forEach(el => {
+  document.querySelectorAll('a, button, .ph').forEach(el => {
     el.addEventListener('mouseenter', () => ring.classList.add('hot'));
     el.addEventListener('mouseleave', () => ring.classList.remove('hot'));
   });
 
-  // --- parallax engine: every layer drifts at its own depth ---
+  // --- hero name scroll animation: drift up, shrink, fade ---
   const heroInner = document.getElementById('heroInner'), heroName = document.getElementById('heroName');
-  const depths = [...document.querySelectorAll('[data-depth]')];
-  const speeds = [...document.querySelectorAll('[data-speed]')];
-  const pimgs = [...document.querySelectorAll('.pimg')];
-  const htrack = document.getElementById('htrack');
-  let ticking = false;
-  function parallax() {
-    const vh = innerHeight, sy = scrollY;
-    // fixed depth layers lag behind the scroll
-    depths.forEach(el => {
-      el.style.transform = `translate3d(0, ${(sy * parseFloat(el.dataset.depth)).toFixed(1)}px, 0)`;
-    });
-    c.style.transform = `translate3d(0, ${(sy * 0.08).toFixed(1)}px, 0)`;
-    // floating elements drift relative to viewport center
-    speeds.forEach(el => {
-      const r = el.getBoundingClientRect();
-      const off = ((r.top + r.height / 2) - vh / 2) * parseFloat(el.dataset.speed);
-      el.style.transform = `translate3d(0, ${off.toFixed(1)}px, 0)`;
-    });
-    // images pan inside their windows
-    pimgs.forEach(box => {
-      const r = box.getBoundingClientRect();
-      const prog = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2);
-      box.querySelector('img').style.transform = `translateY(${(-prog * 11).toFixed(2)}%)`;
-    });
-    // giant band slides sideways with scroll
-    if (htrack) htrack.style.transform = `translate3d(${(-sy * 0.25).toFixed(1)}px, 0, 0)`;
-    // hero fades as it leaves
-    const p = Math.min(sy / vh, 1);
+  function onScroll() {
+    const p = Math.min(scrollY / innerHeight, 1);
     heroInner.style.transform = `translateY(${p * -140}px) scale(${1 - p * 0.12})`;
     heroInner.style.opacity = 1 - p * 1.15;
     heroName.style.letterSpacing = `${-0.03 + p * 0.12}em`;
     heroName.style.filter = `blur(${p * 6}px)`;
-    ticking = false;
   }
-  addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(parallax); ticking = true; } }, { passive: true });
-  addEventListener('resize', parallax);
-  parallax();
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // --- reveal shots on scroll ---
   const io = new IntersectionObserver(es => es.forEach(e => {
